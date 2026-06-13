@@ -5,6 +5,8 @@ argument-hint: "PPP Confluence URL"
 arguments: "PPP Confluence URL"
 ---
 
+> **Workflow reference:** See `.claude/skills/WORKFLOW.md` for the full skill sequence and how this step fits.
+
 # Spike
 
 A spike is a **time-boxed learning unit that unblocks a decision**. It can end in (a) a decision, or (b) a PoC summary with throwaway code. Output is always written findings — never shipped code.

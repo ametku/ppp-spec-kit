@@ -2,6 +2,8 @@
 
 This repo codifies a feature delivery workflow where documentation is the source of truth. The goal: stakeholder transparency. Decisions and scope live in artifacts (PRD, PPP, Jira) — not in people's heads.
 
+**PPP = Project Planner Page** (internal term). Never expand it as "Plan, Progress, Problems" or any other form.
+
 ## Canonical Workflow
 
 A single person can act as both PM and Dev. The sequence is:

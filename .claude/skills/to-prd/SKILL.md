@@ -1,28 +1,32 @@
 ---
 name: to-prd
-description: Turn the current conversation context into a PRD and publish it as a Confluence page under a user-provided parent page. Use when user wants to create a PRD from the current context.
+description: Turn the current conversation context into a PRD and publish it as a Confluence page under the configured parent page. Use when user wants to create a PRD from the current context.
 ---
+
+> **Workflow reference:** See `.claude/skills/WORKFLOW.md` for the full skill sequence and how this step fits.
 
 This skill takes the current conversation context and codebase understanding and produces a PRD published to Confluence. Do NOT interview the user — just synthesize what you already know.
 
-The user must provide the parent Confluence page URL or ID where the PRD will be created as a child page.
+The parent page is read from `CLAUDE.local.json` (`confluenceParentPageIdPRD`). Do NOT ask the user for a parent page URL.
 
 ## Process
 
-1. Explore the repo to understand the current state of the codebase, if you haven't already. Use the project's domain glossary vocabulary throughout the PRD, and respect any ADRs in the area you're touching.
+1. Read `CLAUDE.local.json` from the project root and extract `confluenceParentPageIdPRD`. If missing or empty, stop and tell the user to run `/setup-check`.
 
-2. Sketch out the seams at which you're going to test the feature. Existing seams should be preferred to new ones. Use the highest seam possible. If new seams are needed, propose them at the highest point you can.
+2. Explore the repo to understand the current state of the codebase, if you haven't already. Use the project's domain glossary vocabulary throughout the PRD, and respect any ADRs in the area you're touching.
+
+3. Sketch out the seams at which you're going to test the feature. Existing seams should be preferred to new ones. Use the highest seam possible. If new seams are needed, propose them at the highest point you can.
 
    Check with the user that these seams match their expectations.
 
-3. Derive the feature name from the context. The Confluence page title will be `PRD: <feature name>`.
+4. Derive the feature name from the context. The Confluence page title will be `PRD: <feature name>`.
 
-4. Publish the PRD to Confluence:
+5. Publish the PRD to Confluence:
    - Call `getAccessibleAtlassianResources` to get the `cloudId`.
-   - Call `getConfluencePage` on the user-provided parent page to get the `spaceId`.
-   - Search for an existing child page titled `PRD: <feature name>` under the parent using `searchConfluenceUsingCql` (CQL: `title = "PRD: <feature name>" AND parent = <parentId>`).
+   - Call `getConfluencePage` on `confluenceParentPageIdPRD` to get the `spaceId`.
+   - Search for an existing child page titled `PRD: <feature name>` under the parent using `searchConfluenceUsingCql` (CQL: `title = "PRD: <feature name>" AND parent = <confluenceParentPageIdPRD>`).
    - If found: call `updateConfluencePage` with the new content.
-   - If not found: call `createConfluencePage` with `parentId` set to the user-provided page ID.
+   - If not found: call `createConfluencePage` with `parentId` set to `confluenceParentPageIdPRD`.
    - Use `contentFormat: "markdown"`.
 
 <prd-template>

@@ -5,6 +5,8 @@ argument-hint: "Jira issue key (e.g. NR-12345)"
 arguments: "Jira issue key"
 ---
 
+> **Workflow reference:** See `.claude/skills/WORKFLOW.md` for the full skill sequence and how this step fits.
+
 # Spec
 
 Write a technical spec file for a Jira story — a developer-ready document covering architecture decisions, implementation plan, and code references. Target audience: a junior developer picking up the story cold with no prior context.

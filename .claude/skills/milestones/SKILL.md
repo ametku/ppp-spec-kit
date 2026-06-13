@@ -5,6 +5,8 @@ argument-hint: "PPP Confluence URL"
 arguments: "PPP Confluence URL"
 ---
 
+> **Workflow reference:** See `.claude/skills/WORKFLOW.md` for the full skill sequence and how this step fits.
+
 # Milestones
 
 Interview the user and write a milestones table directly to the PPP Confluence page — including dependency chain, system state transitions, and parallelism shown as a terminal diagram in chat.
