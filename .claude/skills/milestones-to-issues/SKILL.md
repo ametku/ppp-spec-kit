@@ -5,6 +5,8 @@ argument-hint: "PPP Confluence URL"
 arguments: "PPP Confluence URL"
 ---
 
+> **Workflow reference:** See `.claude/skills/WORKFLOW.md` for the full skill sequence and how this step fits.
+
 # Milestones to Issues
 
 Create Jira stories for the next unstarted PPP milestone.

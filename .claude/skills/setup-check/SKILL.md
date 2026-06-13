@@ -20,18 +20,19 @@ ls CLAUDE.local.json
 If missing, tell the user to copy the template:
 
 ```bash
-cp templates/CLAUDE.local.json.template CLAUDE.local.json
+cp .claude/templates/CLAUDE.local.json.template CLAUDE.local.json
 ```
 
 If it exists, read it and verify all required fields are present and non-empty:
 
-| Field | Required |
-|---|---|
-| `teamId` | yes |
-| `teamName` | yes |
-| `jiraProjectKey` | yes |
-| `confluenceSpaceKey` | yes |
-| `confluenceParentPageId` | yes |
+| Field | Required | Description |
+|---|---|---|
+| `teamId` | yes | UUID of your team in Jira (found in team settings or board URL) |
+| `teamName` | yes | Display name of your team (e.g., "NRAI-CS -> Vertical Visualizations") |
+| `jiraProjectKey` | yes | Jira project key prefix for issues (e.g., "NR") |
+| `confluenceParentPageIdPRD` | yes | Numeric page ID of the Confluence page under which PRDs will be created as children (found in the page URL: `/pages/123456789/...`) |
+| `confluenceParentPageIdPPP` | yes | Numeric page ID of the Confluence page under which PPPs will be created as children |
+| `confluencePPPTemplatePageId` | yes | Numeric page ID of the PPP template page to copy when creating new PPPs (the "Copy Me" template) |
 
 Report any missing or empty fields by name.
 
