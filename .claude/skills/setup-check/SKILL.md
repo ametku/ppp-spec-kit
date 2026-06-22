@@ -64,6 +64,16 @@ Check if the `superpowers:brainstorming` skill is available by searching for it 
 
 If missing: tell the user to install the superpowers plugin (`superpowers@claude-plugins-official`).
 
+### 6. lavish skill
+
+Check if `.agents/skills/lavish/SKILL.md` exists in the project root.
+
+If missing: tell the user to run:
+
+```sh
+npx skills add kunchenguid/lavish-axi --skill lavish
+```
+
 ## Output Format
 
 ```
@@ -74,6 +84,7 @@ Setup Check Results
 ✓ Node.js                  — v20.11.0
 ✓ atlassian-mcp            — connected
 ✗ superpowers plugin       — not found
+✓ lavish skill             — installed
 ───────────────────────────────────────────
 2 issues found. Fix the ✗ items above before running skills.
 ```
