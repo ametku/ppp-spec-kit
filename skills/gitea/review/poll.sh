@@ -1,11 +1,19 @@
 #!/usr/bin/env bash
 # poll.sh — polls a Gitea PR for review status changes
-# Usage: ./poll.sh <repo_name> <pr_number>
+# Usage: ./poll.sh <repo_name> <pr_number> [--since-review <id>]
 # Outputs structured event lines; exits when status changes.
 set -euo pipefail
 
 REPO=$1
 PR_NUMBER=$2
+SINCE_REVIEW=0
+shift 2
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --since-review) SINCE_REVIEW=$2; shift 2 ;;
+    *) shift ;;
+  esac
+done
 GITEA_TOKEN="3a28ca146ab73541632ffb9f28378792b3d8b675"
 GITEA_URL="http://localhost:4000"
 POLL_INTERVAL=20
@@ -24,8 +32,11 @@ try:
 except:
     print('ERROR:failed to parse reviews')
     sys.exit(0)
+since_id = int('$SINCE_REVIEW')
 states = [(r.get('id'), r.get('state','')) for r in reviews]
 for rid, state in reversed(states):
+    if rid <= since_id:
+        continue
     if state == 'REQUEST_CHANGES':
         print(f'CHANGES_REQUESTED:{rid}')
         sys.exit(0)
