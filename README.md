@@ -16,6 +16,8 @@ Dev Flow:
                 /gitea-setup (once) → /gitea-review (per PR)
 ```
 
+<img width="1616" height="4640" alt="image" src="https://github.com/user-attachments/assets/0c417b05-5819-4c38-a170-6ad3d68058e8" />
+
 ### PM Persona
 
 1. **`/grillme`** — Start here. Stress-test a feature idea by getting grilled on every branch of the decision tree.
