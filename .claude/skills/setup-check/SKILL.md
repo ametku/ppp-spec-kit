@@ -64,7 +64,27 @@ Check if the `superpowers:brainstorming` skill is available by searching for it 
 
 If missing: tell the user to install the superpowers plugin (`superpowers@claude-plugins-official`).
 
-### 6. lavish skill
+### 6. Gitea
+
+**a. Gitea running**
+```bash
+curl -sf http://localhost:4000/api/v1/version > /dev/null && echo "running" || echo "not running"
+```
+If not running: tell the user to start it with `rdctl shell -- docker start gitea`.
+
+**b. `tea` CLI**
+```bash
+tea --version
+```
+If missing: tell the user to install with `brew install tea` (or `go install code.gitea.io/tea@latest`).
+
+**c. `local` git remote**
+```bash
+git remote get-url local 2>/dev/null && echo "set" || echo "missing"
+```
+If missing: tell the user to run `/gitea-setup` to configure the remote.
+
+### 7. lavish skill
 
 Check if `.agents/skills/lavish/SKILL.md` exists in the project root.
 
@@ -85,6 +105,7 @@ Setup Check Results
 ✓ atlassian-mcp            — connected
 ✗ superpowers plugin       — not found
 ✓ lavish skill             — installed
+✓ Gitea                    — running, tea installed, local remote set
 ───────────────────────────────────────────
 2 issues found. Fix the ✗ items above before running skills.
 ```
