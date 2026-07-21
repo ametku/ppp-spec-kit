@@ -12,6 +12,8 @@ Dev Flow:
   /prd-to-ppp → /milestones (refine) → /milestones-to-issues (repeat per milestone)
                                  ↕
                               /spike (when blocked)
+                                 ↓
+                /gitea-setup (once) → /gitea-review (per PR)
 ```
 
 ### PM Persona
@@ -29,10 +31,15 @@ Dev Flow:
 8. **`/milestones-to-issues`** — Read the PPP, pick the first NOT STARTED milestone, break it into vertical-slice Jira stories.
 9. **`/spike`** — When a decision is blocked by missing information, file a time-boxed Jira investigation and mark it as a PPP blocker.
 
+### Code Review
+
+10. **`/gitea-setup`** — One-time setup: checks Gitea is running, creates remote repo, adds `local` git remote, configures `tea` CLI, and pushes default + current branches. Safe to re-run. Pass `clean` to wipe and re-create.
+11. **`/gitea-review`** — Push current branch to local Gitea, create or update a PR with a session handoff baked into the description, open it in the browser, and poll for review. On changes-requested, shows comments and asks whether to address in current session or open a new cmux Claude session. On approval, prints the `git push origin` next step.
+
 ### Utility
 
-10. **`/create-jira`** — Low-level command to create a single Jira ticket. Used internally by other skills.
-11. **`/setup-check`** — Verify all prerequisites are in place (MCPs, credentials, config). Run this first in a new environment.
+12. **`/create-jira`** — Low-level command to create a single Jira ticket. Used internally by other skills.
+13. **`/setup-check`** — Verify all prerequisites are in place (MCPs, credentials, config). Run this first in a new environment.
 
 ## How Skills and Commands Differ
 
@@ -58,7 +65,10 @@ ppp-spec-kit/
 │   ├── milestones/SKILL.md              # Interview → PPP milestones
 │   ├── milestones-to-issues/SKILL.md    # PPP milestone → Jira stories
 │   ├── spike/SKILL.md                   # Blocked decision → Jira spike ticket
-│   └── setup-check/SKILL.md             # Verify prerequisites (MCPs, creds, config)
+│   ├── setup-check/SKILL.md             # Verify prerequisites (MCPs, creds, config)
+│   └── gitea/
+│       ├── setup/SKILL.md               # One-time local Gitea repo setup
+│       └── review/SKILL.md              # Push branch, create PR, poll for review
 ├── commands/                            # User-invoked only
 │   ├── review-and-approve-ppp.md        # Validate PPP vs PRD
 │   ├── prd-to-ppp.md                    # PRD → PPP content
@@ -139,4 +149,13 @@ After installing, run `/setup-check` to verify everything is configured correctl
 ```
 > "/ppp-spec-kit/review-and-approve-ppp https://confluence.../PPP https://confluence.../PRD"
   → coverage matrix, gaps, verdict
+```
+
+### Dev doing a local code review
+```
+> "/gitea-setup"
+  → creates Gitea repo, adds `local` remote, pushes current branch
+> "/gitea-review"
+  → pushes branch, creates PR with session context, opens in browser
+  → polls for review; on approval prints `git push origin <branch>`
 ```
