@@ -16,7 +16,7 @@ Dev Flow:
                 /gitea-setup (once) → /gitea-review (per PR)
 ```
 
-<img width="1616" height="4640" alt="image" src="https://github.com/user-attachments/assets/0c417b05-5819-4c38-a170-6ad3d68058e8" />
+<img width="259" height="734" alt="Screenshot 2026-09-03 at 11 27 21" src="https://github.com/user-attachments/assets/2d21d859-7bf0-41c8-9e50-828026c38a84" />
 
 ### PM Persona
 
