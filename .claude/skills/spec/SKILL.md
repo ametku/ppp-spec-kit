@@ -147,6 +147,26 @@ the details.}
 
 ---
 
+## Task Graph
+
+Mermaid DAG derived from the Implementation Plan above. Each node is a step
+number + short label. Edges show "must complete before" dependencies. Steps
+that can run in parallel have no edge between them.
+
+```mermaid
+graph TD
+  1["{step 1 label}"] --> 2["{step 2 label}"]
+  2 --> 3["{step 3 label}"]
+  2 --> 4["{step 4 label — parallel with 3}"]
+  3 --> 5["{step 5 label}"]
+  4 --> 5
+```
+
+{Omit this section only if the plan is strictly sequential with no
+parallelism worth calling out.}
+
+---
+
 ## Code References
 
 Files and patterns to read before starting:
@@ -201,7 +221,7 @@ Technical decisions, implementation plan, and code references are documented the
   Jira: NR-12345 (comment added)
   Milestone: m2-mobile-harvester — Mobile Harvester
   Sections: Context, Architecture Decisions (N), Implementation Plan,
-            Code References, Acceptance Criteria, Testing
+            Task Graph, Code References, Acceptance Criteria, Testing
 ```
 
 ---
@@ -214,3 +234,4 @@ Technical decisions, implementation plan, and code references are documented the
 - Write for a junior developer: explain the WHY, not just the WHAT.
 - Do not copy-paste from the Jira description — synthesize and add technical depth.
 - Trust Claude to fill in implementation details; the spec encodes decisions, not a tutorial.
+- Task graph must be derived from the Implementation Plan — do not invent steps that aren't listed there.

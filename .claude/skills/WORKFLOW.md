@@ -15,6 +15,7 @@ This file is the source of truth for skill sequencing. Skills reference it so th
 6. /milestones-to-issues        — create Jira stories for the next unstarted milestone
    (if blocked) /spike          — extract a time-boxed investigation spike
 7. /spec                        — write a developer-ready technical spec for a story
+8. /implement-spec              — implement the spec via concurrent cmux subagents
 ```
 
 ## Rules
@@ -38,3 +39,4 @@ This file is the source of truth for skill sequencing. Skills reference it so th
 | milestones-to-issues | Jira Story tickets |
 | spike | Confluence spec page + Jira spike story + PPP row |
 | spec | `ppp_specs/<issue-key>.md` |
+| implement-spec | Git branch `impl/<issue-key>` + commits per step |
